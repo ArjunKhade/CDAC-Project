@@ -69,7 +69,7 @@ const Header = () => {
       >
         <Nav className="me-auto">
           <NavLink to="/home" className="text-decoration-none text-light mx-5">
-            <h2 className="logo_text">FreshCart</h2>
+            <h2 className="logo_text">FreshCart India New Generation Online Store</h2>
           </NavLink>
           {/* <input
             className="search_bar"
