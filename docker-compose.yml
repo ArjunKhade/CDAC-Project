@@ -1,29 +1,36 @@
-version: "3"
+#version: "3"  # Optional, safe to remove with Compose v2+
+
 services:
   backend:
     container_name: backend
     image: backend
-    restart: always
     build: ./backend/
+    restart: always
     ports:
-      - 9090:8080 
+      - "9090:9090"   # changed host port from 9090 to 8080 to avoid conflict with frontend
     environment:
       MYSQL_HOST: mysqldb
       MYSQL_USER: root
       MYSQL_PASSWORD: root
       MYSQL_PORT: 3306
+    depends_on:
+      - mysqldb
+
   mysqldb:
     container_name: mysqldb
-    image:  database
+    image: database
     build: ./database/
     environment:
       MYSQL_DATABASE: fresh_cart
       MYSQL_ROOT_PASSWORD: root
     ports:
-      - 3307:3306
+      - "3307:3306"
+
   frontend:
     container_name: frontend
     image: frontend
     build: ./frontend/
     ports:
-      - 80:80
+      - "90:80"
+    depends_on:
+      - backend
